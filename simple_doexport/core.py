@@ -19,15 +19,18 @@ def notebook2do(fname):
     "Create a module file for `fname`."
     fname = Path(fname)
     nb = read_nb(fname)
-    cells = [(i,c) for i,c in enumerate(nb['cells']) if c['cell_type'] == 'code']
-    for i,c in cells:
+    fname_out = f'{fname.stem}.do'
+    with open(fname_out, 'w') as f:
+        f.write('\n')
+    cells = [c for c in nb['cells'] if c['cell_type'] == 'code']
+    for i,c in enumerate(cells):
         code = c['source']
-        fname_out = f'{Path(fname).stem}.do'
-        if i != c['execution_count']:
-            print(f"Warning: execution count, {c['execution_count']}, differs from cell number, {i}.")
+        if i+1 != c['execution_count']:
+            print(f"Warning: execution count, {c['execution_count']}, differs from cell number, {i+1}.")
         with open(fname_out, 'a', encoding='utf8') as f:
-            f.write(f'**# [{i}]:')
+            f.write(f'**# [{i+1}]:\n')
             f.write(code)
+            f.write('\n\n')
 
 # Cell
 @call_parse
