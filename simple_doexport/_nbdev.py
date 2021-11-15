@@ -3,7 +3,8 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"read_nb": "00_core.ipynb",
-         "notebook2do": "00_core.ipynb"}
+         "notebook2do": "00_core.ipynb",
+         "simple_doexport": "00_core.ipynb"}
 
 modules = ["core.py"]
 
